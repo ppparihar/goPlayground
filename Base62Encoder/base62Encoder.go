@@ -6,7 +6,7 @@ import "strings"
 var str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 var charList = []rune(str)
 
-func Encode(num int) string {
+func Encode(num int64) string {
 	var sb strings.Builder
 	for i := num; i > 0; {
 		sb.WriteString(string(charList[i%62]))
@@ -15,10 +15,11 @@ func Encode(num int) string {
 	return Reverse(sb.String())
 }
 
-func Decode(input string) int {
-	var num int
+func Decode(input string) int64 {
+	var num int64 = 0
+	var base int64 = 62
 	for _, r := range input {
-		num = num*62 + strings.IndexRune(str, r)
+		num = num*base + int64(strings.IndexRune(str, r))
 	}
 	return num
 }
