@@ -25,7 +25,7 @@ func main() {
 		w.Header().Set("Content-Type", "text/plain")
 
 		// Write the response body
-		fmt.Fprintf(w, "Hello, World! %s\n", nodeName)
+		fmt.Fprintf(w, "Hello, World! from %s\n", nodeName)
 	}
 
 	// Register the handler function to handle all requests

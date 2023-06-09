@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"os"
+	"strings"
 	"sync"
 )
 
@@ -52,21 +54,20 @@ func (lb *LoadBalancer) ReverseProxyHandler(w http.ResponseWriter, r *http.Reque
 }
 
 func main() {
-	// backendServers := []*BackendServer{}
-	// nodes := os.Getenv("nodes")
-	// if nodes != "" {
-	// 	nodeList := strings.Split(nodes, ",")
-	// 	for _, node := range nodeList {
-	// 		backendServers = append(backendServers, &BackendServer{
-	// 			URL:  fmt.Sprintf("http://%s:8081", node),
-	// 			Host: fmt.Sprintf("%s:8081", node),
-	// 		})
-	// 	}
-	// }
+	nodes := os.Getenv("nodes")
+
 	//Define the backend servers
-	backendServers := []*BackendServer{
-		{URL: "http://node1:8081", Host: "node1:8081"},
-		{URL: "http://node2:8081", Host: "node2:8081"},
+	backendServers := []*BackendServer{}
+
+	if nodes != "" {
+		nodeList := strings.Split(nodes, ",")
+		for _, node := range nodeList {
+			backendServers = append(backendServers, &BackendServer{
+				URL: "http://" + node, Host: node,
+			})
+		}
+	} else {
+		log.Fatal("No nodes specified")
 	}
 
 	// Create the load balancer
