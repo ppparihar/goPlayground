@@ -16,7 +16,7 @@ services:
 
   node1:
      container_name: node1
-     build: /node
+     build: /Backend-Node
      environment:
        - name="Node1"
      ports:
@@ -25,7 +25,7 @@ services:
        - gateway
   node2:
      container_name: node2
-     build: /node
+     build: /Backend-Node
      environment:
        - name="Node2"
      ports:
