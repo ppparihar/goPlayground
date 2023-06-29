@@ -1,6 +1,6 @@
 services:
   lb:
-    build: ./round-robin
+    build: ./LB-Server
     depends_on:
       - node1
       - node2
