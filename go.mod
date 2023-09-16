@@ -1,4 +1,4 @@
-module goplayground
+module github.com/goPlayground
 
 go 1.20
 

@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"goplayground/tokenBucket"
+	"github.com/goPlayground/tokenBucket"
 )
 
 func TestTokenBucket(t *testing.T) {
