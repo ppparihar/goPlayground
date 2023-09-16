@@ -1,0 +1,30 @@
+services:
+  lb:
+    build: ./LB-Server
+    depends_on:
+      - node1
+      - node2
+    ports:
+      - "8080:8080"
+    environment:
+       - nodes=node1:8081,node2:8081
+    links:
+      - node1:node1
+      - node2:node2
+    networks:
+      - gateway
+      
+  node1:
+     build: /Backend-Node
+     environment:
+       - name="Node1"
+     networks:
+       - gateway
+  node2:
+     build: /Backend-Node
+     environment:
+       - name="Node2"
+     networks:
+       - gateway
+networks:
+  gateway: {}
